@@ -37,3 +37,21 @@ def word_without_one_letter(dictionary, text):
     for word in text:
         ans.append(word in dict_words)
     return ans
+
+def gistogram_of_char(str):
+    dict_for_letters = {}
+    max_symbol_rate = 0
+    for symbol in str:
+        if symbol not in dict_for_letters:
+            dict_for_letters[symbol] = 0
+        dict_for_letters[symbol] += 1
+        max_symbol_rate = max(max_symbol_rate, dict_for_letters[symbol])
+    dict_for_letters_sort = sorted(dict_for_letters.keys())
+    for i in range(max_symbol_rate, 0, -1):
+        for symbol in dict_for_letters_sort:
+            if dict_for_letters[symbol] >= i:
+                print('#', end='')
+            else:
+                print(' ', end='')
+        print()
+    print(''.join(dict_for_letters_sort))
