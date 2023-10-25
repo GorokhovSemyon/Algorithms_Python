@@ -3,8 +3,8 @@
 # import finding_simple
 # import finding_simple
 # import finding_simple
-import special_tasks
-import simple_matrix
+# import special_tasks
+# import simple_matrix
 # import string_operations_simple
 # import string_operations_simple
 # import string_operations_simple
@@ -36,4 +36,16 @@ if __name__ == '__main__':
 
     # print(special_tasks.chess_rook_beat_counter(double_array))
 
+    class MyList(list):
+        def append(self, elem):
+            if (type(elem) == type(1) or type(elem) == type(1.1)):
+                self.extend([elem])
 
+            
+
+
+    test = MyList()
+    print(type(1))
+    print(type(1.1))
+    test.append([1,2,3])
+    print(test)
