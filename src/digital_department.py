@@ -61,3 +61,73 @@
 #
 #     a[2].append(3)
 #     print(a)
+# --------------------------------------------------------------
+# Декоратор расчёта времени выполнения функции
+# import time
+#     def time_decorator(func):
+#         def wrapper(*args, **kwargs):
+#             before = time.time()
+#             value = func(*args, **kwargs)
+#             print(round(time.time() - before))
+#             return value
+#
+#         return wrapper
+# --------------------------------------------------------------
+# Декоратор логов
+# import datetime
+# from inspect import getcallargs
+#
+#
+# def logging_decorator(__list):
+#     def decorator(f):
+#         def wrapper(*args, **kwargs):
+#             time = datetime.datetime.now()
+#             res = f(*args, **kwargs)
+#             __list.append({"name": f.__name__,
+#                            "arguments": getcallargs(f, *args, **kwargs),
+#                            "call_time": time,
+#                            "result": res})
+#             return res
+#
+#         return wrapper
+#
+#     return decorator
+#
+#
+# logger = []  # этот словарь будет хранить наш "лог"
+#
+#
+# @logging_decorator(logger)  # в аргументы фабрики
+# def test_simple(a, b=3):
+#     return 127
+#
+#
+# test_simple(21)
+#
+# print(logger)
+# --------------------------------------------------------------
+# Задание на сетевое взяимодействие
+# import requests
+# import json
+# import pickle
+#
+# stat = []
+# response = requests.get("https://jsonplaceholder.typicode.com/users")
+# users = [*response.json()]
+# for prsn in users:
+#     stat.append({"id": prsn["id"], "username": prsn["username"], "email": prsn["email"], "posts": 0, "comments": 0})
+# stat = sorted(stat, key = lambda x: x["id"])
+# response = requests.get("https://jsonplaceholder.typicode.com/posts")
+# posts = [*response.json()]
+# for el in posts:
+#     stat[int(el['userId'])-1]["posts"] += 1
+# response = requests.get("https://jsonplaceholder.typicode.com/comments")
+# cmnts = [*response.json()]
+# for i in cmnts:
+#     for j in stat:
+#         if j["email"] == i["email"]:
+#             j["comments"] += 1
+# response = requests.post("https://webhook.site/ba77f608-3cce-40f5-b8f1-794217e3518e", #адрес тут переменный
+#                          data=json.dumps({"statistics": stat}))
+# with open("solution.pickle", 'wb') as f:
+#     pickle.dump(response, f)
